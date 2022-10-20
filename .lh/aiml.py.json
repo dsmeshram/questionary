@@ -1,0 +1,18 @@
+{
+    "sourceFile": "aiml.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1666246724591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1666246724591,
+            "name": "Commit-0",
+            "content": "from Questgen import main\nimport ssl\nfrom pydantic import BaseModel\nclass question(BaseModel):\n    text: str\n    type: str\n\n\nclass aiml:\n\n    def __init__(self) -> None:\n\n        try:\n            _create_unverified_https_context = ssl._create_unverified_context\n        except AttributeError:\n            pass\n        else:\n            ssl._create_default_https_context = _create_unverified_https_context\n            pass\n\n    def question_gen(self,text,type):\n       \n        payload = {\n                    \"input_text\": text\n                }\n\n        if type == \"boolq\":\n            qe= main.BoolQGen()\n            output = qe.predict_boolq(payload)\n        elif type == \"mcq\":\n            qe= main.QGen()\n            output = qe.predict_mcq(payload)\n        elif type == \"shortq\": \n            qe= main.QGen()\n            output = qe.predict_shortq(payload)\n        elif type == \"paraphrase\": \n            qe= main.QGen()\n            output = qe.paraphrase(payload)        \n       \n        return output"
+        }
+    ]
+}
